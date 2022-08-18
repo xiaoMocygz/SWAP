@@ -46,7 +46,7 @@ export default function CurrencyLogo({
 
       return [getTokenLogoURL(currency.address)]
     }
-    return []
+    return [] 
   }, [currency, uriLocations])
 
   if (currency === ETHER) {

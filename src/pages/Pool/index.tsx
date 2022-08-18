@@ -67,7 +67,7 @@ export default function Pool() {
       <AppBody>
         <SwapPoolTabs active={'pool'} />
         <AutoColumn gap="lg" justify="center">
-          <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to="/add/ETH">
+          <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to="/add/0x55d398326f99059fF775485246999027B3197955/0x52445374E55a63C0De647445D5B6a4244702980C">
             <Text fontWeight={500} fontSize={20}>
               增加流动性
             </Text>
