@@ -438,7 +438,7 @@ export default function Swap() {
                   <Text fontSize={16} fontWeight={500}>
                     {priceImpactSeverity > 3 && !isExpertMode
                       ? `价格影响高`
-                      : `兑换${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                      : `${priceImpactSeverity > 2 ? ' 仍要' : ''}兑换`}
                   </Text>
                 </ButtonError>
               </RowBetween>
@@ -466,7 +466,7 @@ export default function Swap() {
                     ? swapInputError
                     : priceImpactSeverity > 3 && !isExpertMode
                     ? `价格影响太高`
-                    : `兑换${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                    : `${priceImpactSeverity > 2 ? ' 仍要' : ''}兑换`}
                 </Text>
               </ButtonError>
             )}
