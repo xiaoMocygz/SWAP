@@ -1,8 +1,7 @@
 // the Uniswap Default token list lives here
 // export const DEFAULT_TOKEN_LIST_URL = 'https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json'
-export const DEFAULT_TOKEN_LIST_URL = 'https://tokens.pancakeswap.finance/pancakeswap-extended.json'
-// export const DEFAULT_TOKEN_LIST_URL = '../../eotcswap.json'
-
+// export const DEFAULT_TOKEN_LIST_URL = 'https://tokens.pancakeswap.finance/pancakeswap-extended.json'
+export const DEFAULT_TOKEN_LIST_URL = 'https://raw.githubusercontent.com/EOTCotc/ListTokens/main/bscTokenLists/eotcswap.json'
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   DEFAULT_TOKEN_LIST_URL,
   // 't2crtokens.eth', // kleros
