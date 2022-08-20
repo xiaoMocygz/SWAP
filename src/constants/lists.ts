@@ -3,7 +3,7 @@
 // export const DEFAULT_TOKEN_LIST_URL = 'https://tokens.pancakeswap.finance/pancakeswap-extended.json'
 export const DEFAULT_TOKEN_LIST_URL = 'https://raw.githubusercontent.com/EOTCotc/ListTokens/main/bscTokenLists/eotcswap.json'
 export const DEFAULT_LIST_OF_LISTS: string[] = [
-  DEFAULT_TOKEN_LIST_URL,
+  DEFAULT_TOKEN_LIST_URL
   // 't2crtokens.eth', // kleros
   // 'tokens.1inch.eth', // 1inch
   // 'synths.snx.eth',
@@ -18,6 +18,6 @@ export const DEFAULT_LIST_OF_LISTS: string[] = [
   // 'https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json',
   // 'https://defiprime.com/defiprime.tokenlist.json',
   //  'https://umaproject.org/uma.tokenlist.json'
-   'https://tokens.pancakeswap.finance/coingecko.json'
+  //  'https://tokens.pancakeswap.finance/coingecko.json'
   //  'https://tokens.pancakeswap.finance/cmc.json'
 ]
