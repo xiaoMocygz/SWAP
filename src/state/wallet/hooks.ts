@@ -88,7 +88,7 @@ export function useTokenBalances(
   return useTokenBalancesWithLoadingIndicator(address, tokens)[0]
 }
 
-// get the balance for a single token/account combo
+// get the balance for a single token/account combo  获取单个代币/账户组合的余额
 export function useTokenBalance(account?: string, token?: Token): TokenAmount | undefined {
   const tokenBalances = useTokenBalances(account, [token])
   if (!token) return undefined

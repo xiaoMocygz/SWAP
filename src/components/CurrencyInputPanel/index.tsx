@@ -92,30 +92,32 @@ const StyledTokenName = styled.span<{ active?: boolean }>`
   display:flex;
 
 `
+// :hover {
+//   border: 1px solid ${({ theme }) => theme.primary1};
+// }
+// :focus {
+//   border: 1px solid ${({ theme }) => theme.primary1};
+//   outline: none;
+// }
+const StyledBalanceMax = styled.button`
+  height: 28px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  position: absolute;
+  top: 6px;
+  left: 65px;
 
-// const StyledBalanceMax = styled.button`
-//   height: 28px;
-//   background-color: ${({ theme }) => theme.primary5};
-//   border: 1px solid ${({ theme }) => theme.primary5};
-//   border-radius: 0.5rem;
-//   font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  color: ${({ theme }) => theme.primaryText1};
 
-//   font-weight: 500;
-//   cursor: pointer;
-//   margin-right: 0.5rem;
-//   color: ${({ theme }) => theme.primaryText1};
-//   :hover {
-//     border: 1px solid ${({ theme }) => theme.primary1};
-//   }
-//   :focus {
-//     border: 1px solid ${({ theme }) => theme.primary1};
-//     outline: none;
-//   }
-
-//   ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-//     margin-right: 0.5rem;
-//   `};
-// `
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+    margin-right: 0.5rem;
+  `};
+`
 
 interface CurrencyInputPanelProps {
   value: string
@@ -236,7 +238,7 @@ export default function CurrencyInputPanel({
               {/* && (
                 <StyledBalanceMax onClick={onMax}>MAX</StyledBalanceMax>
               ) */}
-              {account && currency && showMaxButton && label !== 'To'}
+              {account && currency && showMaxButton && label !== 'To' && (<StyledBalanceMax onClick={onMax}>全部</StyledBalanceMax>)}
             </>
           )}
         </InputRow>

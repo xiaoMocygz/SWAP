@@ -24,7 +24,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
         <RowBetween>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
-              {isExactIn ? '最低收到' : 'Maximum sold'}
+              {isExactIn ? '最低收到' : '最大销售量'}
             </TYPE.black>
             <QuestionHelper text="如果在确认之前出现较大的不利价格变动，您的交易将恢复。" />
           </RowFixed>

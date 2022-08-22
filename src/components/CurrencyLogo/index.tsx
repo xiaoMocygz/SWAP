@@ -11,8 +11,8 @@ import Logo from '../Logo'
 
 const getTokenLogoURL = (address: string) =>
   // `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
-  // `https://raw.githubusercontent.com/EOTCotc/ListTokens/main/img/${address}.png`
-  `https://raw.githubusercontent.com/EOTCotc/SWAP/main/eotc32.png`
+  `https://github.com/xiaoMocygz/xiaoMocygz/tree/main/img/${address}/logo.png`
+  // `https://raw.githubusercontent.com/EOTCotc/ListTokens/main/img/eotc.png`
 
 const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};

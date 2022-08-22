@@ -23,7 +23,7 @@ export function computeTradePriceBreakdown(
         )
       )
 
-  // remove lp fees from price impact
+  // remove lp fees from price impact   从价格影响中去除 lp 费用
   const priceImpactWithoutFeeFraction = trade && realizedLPFee ? trade.priceImpact.subtract(realizedLPFee) : undefined
 
   // the x*y=k impact
@@ -31,7 +31,7 @@ export function computeTradePriceBreakdown(
     ? new Percent(priceImpactWithoutFeeFraction?.numerator, priceImpactWithoutFeeFraction?.denominator)
     : undefined
 
-  // the amount of the input that accrues to LPs
+  // the amount of the input that accrues to LPs    LP 的输入量
   const realizedLPFeeAmount =
     realizedLPFee &&
     trade &&

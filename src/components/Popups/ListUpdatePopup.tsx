@@ -7,7 +7,7 @@ import { AppDispatch } from '../../state'
 import { useRemovePopup } from '../../state/application/hooks'
 import { acceptListUpdate } from '../../state/lists/actions'
 import { TYPE } from '../../theme'
-import listVersionLabel from '../../utils/listVersionLabel'
+// import listVersionLabel from '../../utils/listVersionLabel'
 import { ButtonSecondary } from '../Button'
 import { AutoColumn } from '../Column'
 import { AutoRow } from '../Row'
@@ -54,8 +54,8 @@ export default function ListUpdatePopup({
       <AutoColumn style={{ flex: '1' }} gap="8px">
         {auto ? (
           <TYPE.body fontWeight={500}>
-            The token list &quot;{oldList.name}&quot; has been updated to{' '}
-            <strong>{listVersionLabel(newList.version)}</strong>.
+            {/* The token list &quot;{oldList.name}&quot; has been updated to{' '}
+            <strong>{listVersionLabel(newList.version)}</strong>. */}
           </TYPE.body>
         ) : (
           <>
