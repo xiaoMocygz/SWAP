@@ -2,8 +2,8 @@ import { Currency } from 'eotc-bscswap-sdk'
 import React from 'react'
 import styled from 'styled-components'
 import CurrencyLogo from '../CurrencyLogo'
-// import EotcLogn from '../../assets/images/eotclogo.png'
-// <img src={EotcLogn} style={{width:'24px',height:'24px'}} alt=""/>
+// import EotcLogo from '../../assets/images/eotclogo.png'
+// <img src={EotcLogo} style={{width:'24px',height:'24px'}} alt=""/>
 
 const Wrapper = styled.div<{ margin: boolean; sizeraw: number }>`
   position: relative;
@@ -34,7 +34,7 @@ export default function DoubleCurrencyLogo({
   margin = false
 }: DoubleCurrencyLogoProps) {
   return (
-    <Wrapper sizeraw={size} margin={margin}>
+    <Wrapper sizeraw={size} margin={margin}> 
       {currency0 && <HigherLogo currency={currency0} size={size.toString() + 'px'} />}
       {currency1 && <CoveredLogo currency={currency1} size={size.toString() + 'px'} sizeraw={size} />}
     </Wrapper>

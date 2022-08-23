@@ -11,10 +11,10 @@ import Logo from '../Logo'
 
 const getTokenLogoURL = (address: string) =>
   // `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
-  `https://github.com/xiaoMocygz/xiaoMocygz/tree/main/img/${address}/logo.png`
+  `https://raw.githubusercontent.com/xiaoMocygz/ListTokens/bscImg/img/${address}/logo.png`
   // `https://raw.githubusercontent.com/EOTCotc/ListTokens/main/img/eotc.png`
 
-const StyledEthereumLogo = styled.img<{ size: string }>`
+const StyledEthereumLogo = styled.img<{ size: string }>` 
   width: ${({ size }) => size};
   height: ${({ size }) => size}; 
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
@@ -55,6 +55,9 @@ export default function CurrencyLogo({
   }
 
   return (
+    <>
+    {/* <img src={EotcLogo} style={{width:'24px',height:'24px'}} alt=""/> */}
     <StyledLogo size={size} srcs={srcs} alt={`${currency?.symbol ?? 'token'} logo`} style={style} />
+    </>    
     )
 }
