@@ -198,7 +198,7 @@ export function useSwapCallback(
           },
           gasEstimate
         } = successfulEstimation
-
+        // console.log(successfulEstimation,...args,value,isZero(value),calculateGasMargin)
         return contract[methodName](...args, {
           gasLimit: calculateGasMargin(gasEstimate),
           ...(value && !isZero(value) ? { value, from: account } : { from: account })
@@ -234,8 +234,8 @@ export function useSwapCallback(
               throw new Error('交易被拒绝')
             } else {
               // otherwise, the error was unexpected and we need to convey that
-              console.error(`Swap failed`, error, methodName, args, value)
-              throw new Error(`Swap failed: ${error.message}`)
+              console.error(`交换失败`, error, methodName, args, value)
+              throw new Error(`交换失败: ${error.message}`)
             }
           })
       },

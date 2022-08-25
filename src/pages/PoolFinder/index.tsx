@@ -161,7 +161,7 @@ export default function PoolFinder() {
             <LightCard padding="45px 10px">
               <AutoColumn gap="sm" justify="center">
                 <Text textAlign="center" fontWeight={500}>
-                  Invalid pair.
+                无效对.
                 </Text>
               </AutoColumn>
             </LightCard>
@@ -169,7 +169,7 @@ export default function PoolFinder() {
             <LightCard padding="45px 10px">
               <AutoColumn gap="sm" justify="center">
                 <Text textAlign="center">
-                  Loading
+                正在加载
                   <Dots />
                 </Text>
               </AutoColumn>
