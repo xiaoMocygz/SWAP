@@ -5,7 +5,7 @@ import ReactGA from 'react-ga'
 import { Text } from 'rebass'
 import { ThemeContext } from 'styled-components'
 import AddressInputPanel from '../../components/AddressInputPanel'
-import { ButtonError, ButtonLight, ButtonPrimary, ButtonConfirmed,ButtonWallet } from '../../components/Button'
+import { ButtonError, ButtonLight, ButtonPrimary, ButtonConfirmed, ButtonWallet } from '../../components/Button'
 import Card, { GreyCard } from '../../components/Card'
 import { AutoColumn } from '../../components/Column'
 import ConfirmSwapModal from '../../components/swap/ConfirmSwapModal'
@@ -19,7 +19,6 @@ import { ArrowWrapper, BottomGrouping, SwapCallbackError, Wrapper } from '../../
 import TradePrice from '../../components/swap/TradePrice'
 import TokenWarningModal from '../../components/TokenWarningModal'
 import ProgressSteps from '../../components/ProgressSteps'
-
 
 import { BETTER_TRADE_LINK_THRESHOLD, INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
 import { getTradeVersion, isTradeBetter } from '../../data/V1'
@@ -102,6 +101,7 @@ export default function Swap() {
         [Version.v1]: v1Trade,
         [Version.v2]: v2Trade
       }[toggledVersion]
+  console.log(trade, 'trade')
 
   const betterTradeLinkVersion: Version | undefined =
     toggledVersion === Version.v2 && isTradeBetter(v2Trade, v1Trade, BETTER_TRADE_LINK_THRESHOLD)
@@ -384,7 +384,10 @@ export default function Swap() {
           <BottomGrouping>
             {!account ? (
               <>
-                <ButtonLight onClick={toggleWalletModal}><ButtonWallet src={Wallet}/>连接钱包</ButtonLight>
+                <ButtonLight onClick={toggleWalletModal}>
+                  <ButtonWallet src={Wallet} />
+                  连接钱包
+                </ButtonLight>
               </>
             ) : showWrap ? (
               <ButtonPrimary disabled={Boolean(wrapInputError)} onClick={onWrap}>

@@ -4,9 +4,10 @@ import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
-import { ROUTER_ADDRESS } from '../constants'
+import { ROUTER_ADDRESS, AGGREGATION_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from 'eotc-bscswap-sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
+import IAggregationABI from '../constants/abis/IAggregationABI.json'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -97,6 +98,9 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 // account is optional
 export function getRouterContract(_: number, library: Web3Provider, account?: string): Contract {
   return getContract(ROUTER_ADDRESS, IUniswapV2Router02ABI, library, account)
+}
+export function getAggregationContract(chainId: number, library: Web3Provider, account?: string): Contract {
+  return getContract(AGGREGATION_ADDRESS, IAggregationABI, library, account)
 }
 
 export function escapeRegExp(string: string): string {

@@ -1,0 +1,24 @@
+// import { Contract } from '@ethersproject/contracts'
+import { useActiveWeb3React } from './index'
+import { getAggregationContract } from '../utils'
+export async function useAggregation() {
+  const { account, chainId, library } = useActiveWeb3React()
+  const contract = getAggregationContract(chainId as any, library as any, account as string)
+  // string name;    // DEX名称
+  // address router;  // DEX路由合约
+  // address connectors;  // 链接器地址
+  // uint256 weightedRate;  // 兑换汇率
+  // uint256 balanceA;  // tokenA余额
+  // uint256 balanceB;  // tokenB余额
+  // uint256 lpWeight;  // 资金池厚度
+  const result = await contract.getRate(
+    '0x52445374E55a63C0De647445D5B6a4244702980C',
+    '0x55d398326f99059fF775485246999027B3197955'
+  )
+  console.log(
+    result.filter((item: { name: any }) => item.name),
+    'result'
+  )
+
+  return [...result.filter((item: { name: any }) => item.name)]
+}
