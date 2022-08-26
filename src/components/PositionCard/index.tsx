@@ -75,13 +75,13 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
               </RowFixed>
             </FixedHeightRow>
             <FixedHeightRow onClick={() => setShowMore(!showMore)}>
-              <RowFixed>
+              <RowFixed style={{wordWrap:'break-word',wordBreak:'normal'}}>
                 <DoubleCurrencyLogo currency0={currency0} currency1={currency1} margin={true} size={20} />
                 <Text fontWeight={500} fontSize={20}>
                   {currency0.symbol}/{currency1.symbol}
                 </Text>
               </RowFixed>
-              <RowFixed>
+              <RowFixed style={{wordWrap:'break-word',wordBreak:'normal'}}>
                 <Text fontWeight={500} fontSize={20}>
                   {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
                 </Text>
