@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import { useTotalSupply } from '../../data/TotalSupply'
 
 import { useActiveWeb3React } from '../../hooks'
-import { useTokenBalance } from '../../state/wallet/hooks' 
+import { useTokenBalance } from '../../state/wallet/hooks'
 // import { ExternalLink } from '../../theme'
 import { currencyId } from '../../utils/currencyId'
 import { unwrappedToken } from '../../utils/wrappedCurrency'
@@ -26,7 +26,7 @@ export const FixedHeightRow = styled(RowBetween)`
   height: 24px;
 `
 export const FixedHeightRow2 = styled(RowBetween)`
-  height:24px;
+  height: 24px;
   ${({ theme }) => theme.mediaWidth.upToMoreSmall`
     display:flex;
     height:40px;
@@ -217,7 +217,7 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             </FixedHeightRow>
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-              您的池代币:
+                您的池代币:
               </Text>
               <Text fontSize={16} fontWeight={500}>
                 {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
@@ -225,7 +225,7 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             </FixedHeightRow>
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-              您的池份额:
+                您的池份额:
               </Text>
               <Text fontSize={16} fontWeight={500}>
                 {poolTokenPercentage ? poolTokenPercentage.toFixed(2) + '%' : '-'}

@@ -14,8 +14,8 @@ import { StyledInternalLink, TYPE } from '../../theme'
 import { Text } from 'rebass'
 import { LightCard } from '../../components/Card'
 import { RowBetween } from '../../components/Row'
-// , ButtonSecondary 
-import { ButtonPrimary} from '../../components/Button'
+// , ButtonSecondary
+import { ButtonPrimary } from '../../components/Button'
 import { AutoColumn } from '../../components/Column'
 
 import { useActiveWeb3React } from '../../hooks'
@@ -67,7 +67,12 @@ export default function Pool() {
       <AppBody>
         <SwapPoolTabs active={'pool'} />
         <AutoColumn gap="lg" justify="center">
-          <ButtonPrimary id="join-pool-button" as={Link} style={{ padding: 16 }} to="/add/0x55d398326f99059fF775485246999027B3197955/0x52445374E55a63C0De647445D5B6a4244702980C">
+          <ButtonPrimary
+            id="join-pool-button"
+            as={Link}
+            style={{ padding: 16 }}
+            to="/add/0x55d398326f99059fF775485246999027B3197955/0x52445374E55a63C0De647445D5B6a4244702980C"
+          >
             <Text fontWeight={500} fontSize={20}>
               增加流动性
             </Text>
@@ -84,7 +89,7 @@ export default function Pool() {
             {!account ? (
               <LightCard padding="40px">
                 <TYPE.body color={theme.text3} textAlign="center">
-                连接到钱包以查看您的流动性。
+                  连接到钱包以查看您的流动性。
                 </TYPE.body>
               </LightCard>
             ) : v2IsLoading ? (
@@ -109,7 +114,7 @@ export default function Pool() {
 
             <div>
               <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
-                {hasV1Liquidity ? 'Uniswap V1 liquidity found!' : "没有看到您加入的池?"}{' '}
+                {hasV1Liquidity ? 'Uniswap V1 liquidity found!' : '没有看到您加入的池?'}{' '}
                 <StyledInternalLink id="import-pool-link" to={hasV1Liquidity ? '/migrate/v1' : '/find'}>
                   {hasV1Liquidity ? 'Migrate now.' : '导入它'}
                 </StyledInternalLink>

@@ -17,7 +17,7 @@ const MEDIA_WIDTHS = {
   upToSmall: 600,
   upToMedium: 960,
   upToLarge: 1280,
-  upToMoreSmall:400
+  upToMoreSmall: 400
 }
 
 const mediaWidthTemplates: { [width in keyof typeof MEDIA_WIDTHS]: typeof css } = Object.keys(MEDIA_WIDTHS).reduce(
@@ -59,7 +59,7 @@ export function colors(darkMode: boolean): Colors {
 
     //specialty colors
     modalBG: darkMode ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,.425)',
-    advancedBG: darkMode ?  'rgba(255,255,255,0.6)' :'rgba(0,0,0,0.1)',
+    advancedBG: darkMode ? 'rgba(255,255,255,0.6)' : 'rgba(0,0,0,0.1)',
 
     //primary colors
     primary1: darkMode ? '#ff007a' : '#2172E5',
@@ -216,10 +216,6 @@ body {
   min-height: 100vh;
   background-position: 0 -30vh;
   background-repeat: no-repeat;
-  background-image: ${({ theme }) =>
-    `radial-gradient(50% 50% at 50% 50%, ${transparentize(
-      1,
-      theme.bg1
-    )} 100%)`};
+  background-image: ${({ theme }) => `radial-gradient(50% 50% at 50% 50%, ${transparentize(1, theme.bg1)} 100%)`};
 }
 `

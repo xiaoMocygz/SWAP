@@ -163,7 +163,7 @@ export default function Header() {
             </UniIcon>
             <TitleText>
               {/* <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? Wordmark : WordmarkDark} alt="logo" /> */}
-              <span style={isDark ? {color:'black'} : {color:'white'}}> EOTC</span>
+              <span style={isDark ? { color: 'black' } : { color: 'white' }}> EOTC</span>
             </TitleText>
           </Title>
         </HeaderElement>

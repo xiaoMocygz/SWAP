@@ -7,7 +7,6 @@ import { useMulticallContract } from '../../hooks/useContract'
 import { isAddress } from '../../utils'
 import { useSingleContractMultipleData, useMultipleContractSingleData } from '../multicall/hooks'
 
-
 /**
  * Returns a map of the given addresses to their eventually consistent ETH balances.
  */
@@ -107,7 +106,6 @@ export function useCurrencyBalances(
   const containsETH: boolean = useMemo(() => currencies?.some(currency => currency === ETHER) ?? false, [currencies])
   const ethBalance = useETHBalances(containsETH ? [account] : [])
 
-  
   return useMemo(
     () =>
       currencies?.map(currency => {

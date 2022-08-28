@@ -362,8 +362,7 @@ export default function RemoveLiquidity({
         </RowBetween>
 
         <TYPE.italic fontSize={12} color={theme.text2} textAlign="left" padding={'12px 0 0 0'}>
-          {`估计输出。 如果价格变化超过 ${allowedSlippage /
-            100}% ，您的交易将恢复。`}
+          {`估计输出。 如果价格变化超过 ${allowedSlippage / 100}% ，您的交易将恢复。`}
         </TYPE.italic>
       </AutoColumn>
     )
@@ -403,7 +402,7 @@ export default function RemoveLiquidity({
         )}
         <ButtonPrimary disabled={!(approval === ApprovalState.APPROVED || signatureData !== null)} onClick={onRemove}>
           <Text fontWeight={500} fontSize={20}>
-          确认
+            确认
           </Text>
         </ButtonPrimary>
       </>

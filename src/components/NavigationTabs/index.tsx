@@ -57,7 +57,12 @@ export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' }) {
   const { t } = useTranslation()
   return (
     <Tabs style={{ marginBottom: '20px' }}>
-      <StyledNavLink style={{margin:'0 50px 0 10px'}}  id={`swap-nav-link`} to={'/swap'} isActive={() => active === 'swap'} >
+      <StyledNavLink
+        style={{ margin: '0 50px 0 10px' }}
+        id={`swap-nav-link`}
+        to={'/swap'}
+        isActive={() => active === 'swap'}
+      >
         {t('swap')}
       </StyledNavLink>
       <StyledNavLink id={`pool-nav-link`} to={'/pool'} isActive={() => active === 'pool'}>
@@ -75,7 +80,7 @@ export function FindPoolTabs() {
           <StyledArrowLeft />
         </HistoryLink>
         <ActiveText>增加流动性</ActiveText>
-        <QuestionHelper text={"使用此工具查找不会自动出现在界面中的代币对。"} />
+        <QuestionHelper text={'使用此工具查找不会自动出现在界面中的代币对。'} />
       </RowBetween>
     </Tabs>
   )

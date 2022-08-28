@@ -105,15 +105,14 @@ export default function TokenWarningModal({
             <TYPE.main color={'red2'}>导入的令牌</TYPE.main>
           </AutoRow>
           <TYPE.body color={'red2'}>
-          任何人都可以在以太坊上创建 ERC20 代币 <em>any</em>名称，包括创建虚假版本
-             现有代币和声称代表没有代币的项目的代币。
+            任何人都可以在以太坊上创建 ERC20 代币 <em>any</em>名称，包括创建虚假版本
+            现有代币和声称代表没有代币的项目的代币。
           </TYPE.body>
           <TYPE.body color={'red2'}>
-          该接口可以通过令牌地址加载任意令牌。 请格外小心并进行研究
-             与任意 ERC20 代币交互时。
+            该接口可以通过令牌地址加载任意令牌。 请格外小心并进行研究 与任意 ERC20 代币交互时。
           </TYPE.body>
           <TYPE.body color={'red2'}>
-          如果您购买任意令牌， <strong>您可能无法将其卖回。</strong>
+            如果您购买任意令牌， <strong>您可能无法将其卖回。</strong>
           </TYPE.body>
           {tokens.map(token => {
             return <TokenWarningCard key={token.address} token={token} />

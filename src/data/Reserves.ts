@@ -1,12 +1,12 @@
 import { TokenAmount, Pair, Currency } from 'eotc-bscswap-sdk'
 import { useMemo } from 'react'
-import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.json'
+import IUniswapV2PairABIJSON from '@uniswap/v2-core/build/IUniswapV2Pair.json'
 import { Interface } from '@ethersproject/abi'
 import { useActiveWeb3React } from '../hooks'
 
 import { useMultipleContractSingleData } from '../state/multicall/hooks'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
-
+const { abi: IUniswapV2PairABI } = IUniswapV2PairABIJSON
 const PAIR_INTERFACE = new Interface(IUniswapV2PairABI)
 
 export enum PairState {

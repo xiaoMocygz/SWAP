@@ -3,12 +3,12 @@ import { getAddress } from '@ethersproject/address'
 import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
-import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
+import IUniswapV2Router02ABIJSON from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
 import { ROUTER_ADDRESS, AGGREGATION_ADDRESS } from '../constants'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from 'eotc-bscswap-sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 import IAggregationABI from '../constants/abis/IAggregationABI.json'
-
+const { abi: IUniswapV2Router02ABI } = IUniswapV2Router02ABIJSON
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
   try {

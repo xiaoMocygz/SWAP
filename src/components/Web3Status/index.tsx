@@ -120,8 +120,8 @@ const NetworkIcon = styled(Activity)`
 `
 
 const WalletImg = styled.img`
-  width:16px;
-  height:16px;
+  width: 16px;
+  height: 16px;
 `
 
 // we want the latest one to come first, so return negative if a is after b
@@ -167,7 +167,7 @@ const SOCK = (
 //   return null
 // }
 
-// connector, 
+// connector,
 function Web3StatusInner() {
   const { t } = useTranslation()
   const { account, error } = useWeb3React()

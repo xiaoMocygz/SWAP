@@ -98,7 +98,7 @@ export default function SwapModalFooter({
         <RowBetween>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
-            流动性供应商费用
+              流动性供应商费用
             </TYPE.black>
             <QuestionHelper text="每笔交易的一部分（0.30%）作为协议激励流向流动性提供者。" />
           </RowFixed>

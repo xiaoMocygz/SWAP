@@ -70,9 +70,7 @@ export default function PoolFinder() {
 
   const prerequisiteMessage = (
     <LightCard padding="45px 10px">
-      <Text textAlign="center">
-        {!account ? '连接到钱包以查找池' : '选择一个代币来查找您的流动性'}
-      </Text>
+      <Text textAlign="center">{!account ? '连接到钱包以查找池' : '选择一个代币来查找您的流动性'}</Text>
     </LightCard>
   )
 
@@ -161,7 +159,7 @@ export default function PoolFinder() {
             <LightCard padding="45px 10px">
               <AutoColumn gap="sm" justify="center">
                 <Text textAlign="center" fontWeight={500}>
-                无效对.
+                  无效对.
                 </Text>
               </AutoColumn>
             </LightCard>
@@ -169,7 +167,7 @@ export default function PoolFinder() {
             <LightCard padding="45px 10px">
               <AutoColumn gap="sm" justify="center">
                 <Text textAlign="center">
-                正在加载
+                  正在加载
                   <Dots />
                 </Text>
               </AutoColumn>

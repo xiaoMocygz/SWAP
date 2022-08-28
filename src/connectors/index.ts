@@ -35,6 +35,8 @@ export const walletconnect = new WalletConnectConnector({
   rpc: { 56: NETWORK_URL },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore
   pollingInterval: 15000
 })
 

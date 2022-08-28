@@ -47,7 +47,7 @@ export default function AddLiquidity({
   const { account, chainId, library } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
 
-  const currencyA = useCurrency(currencyIdA) 
+  const currencyA = useCurrency(currencyIdA)
   const currencyB = useCurrency(currencyIdB)
 
   const oneCurrencyIsWETH = Boolean(
@@ -243,8 +243,7 @@ export default function AddLiquidity({
           </Text>
         </Row>
         <TYPE.italic fontSize={12} textAlign="left" padding={'8px 0 0 0 '}>
-          {`估计输出。如果价格变化超过 ${allowedSlippage /
-            100}% 您的交易将恢复。`}
+          {`估计输出。如果价格变化超过 ${allowedSlippage / 100}% 您的交易将恢复。`}
         </TYPE.italic>
       </AutoColumn>
     )
@@ -329,13 +328,13 @@ export default function AddLiquidity({
                 <BlueCard>
                   <AutoColumn gap="10px">
                     <TYPE.link fontWeight={600} color={'primaryText1'}>
-                    您是第一个流动性提供者。
+                      您是第一个流动性提供者。
                     </TYPE.link>
                     <TYPE.link fontWeight={400} color={'primaryText1'}>
-                    您添加的代币比例将决定该池的价格。
+                      您添加的代币比例将决定该池的价格。
                     </TYPE.link>
                     <TYPE.link fontWeight={400} color={'primaryText1'}>
-                    一旦您对价格感到满意，请单击供应进行审查。
+                      一旦您对价格感到满意，请单击供应进行审查。
                     </TYPE.link>
                   </AutoColumn>
                 </BlueCard>

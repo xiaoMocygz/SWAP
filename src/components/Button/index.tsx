@@ -62,10 +62,10 @@ export const ButtonPrimary = styled(Base)`
     opacity: ${({ altDisabledStyle }) => (altDisabledStyle ? '0.7' : '1')};
   }
 `
-// ${({ theme }) => theme.primaryText1}   
+// ${({ theme }) => theme.primaryText1}
 export const ButtonLight = styled(Base)`
-  background-color: ${({ theme }) => theme.primary5} ;
-  color: ${({ theme }) => theme.primaryText1}  ;
+  background-color: ${({ theme }) => theme.primary5};
+  color: ${({ theme }) => theme.primaryText1};
   font-size: 16px;
   font-weight: 500;
   &:focus {
@@ -91,9 +91,9 @@ export const ButtonLight = styled(Base)`
   }
 `
 export const ButtonWallet = styled.img`
-  width:18px;
-  height:18px;
-  margin-right:5px;
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
 `
 
 export const ButtonGray = styled(Base)`
