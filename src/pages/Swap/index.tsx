@@ -19,6 +19,7 @@ import { ArrowWrapper, BottomGrouping, SwapCallbackError, Wrapper } from '../../
 import TradePrice from '../../components/swap/TradePrice'
 import TokenWarningModal from '../../components/TokenWarningModal'
 import ProgressSteps from '../../components/ProgressSteps'
+import Inquire from '../../components/Inquire'
 
 import { BETTER_TRADE_LINK_THRESHOLD, INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
 import { getTradeVersion, isTradeBetter } from '../../data/V1'
@@ -411,7 +412,7 @@ export default function Swap() {
                 >
                   {approval === ApprovalState.PENDING ? (
                     <AutoRow gap="6px" justify="center">
-                      批准 <Loader stroke="white" />
+                      授权 <Loader stroke="white" />
                     </AutoRow>
                   ) : approvalSubmitted && approval === ApprovalState.APPROVED ? (
                     '合法的'
@@ -482,6 +483,7 @@ export default function Swap() {
         </Wrapper>
       </AppBody>
       <AdvancedSwapDetailsDropdown trade={trade} />
+      <Inquire />
     </>
   )
 }
