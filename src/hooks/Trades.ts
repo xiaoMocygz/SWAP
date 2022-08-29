@@ -7,12 +7,14 @@ import { PairState, usePairs } from '../data/Reserves'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
 
 import { useActiveWeb3React } from './index'
-
+// 筛选 tokenA 和 tokenB 所有可用的交易对（包含中转交易对）
 function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
   const { chainId } = useActiveWeb3React()
-
+  // 默认的中转token
+  // 主网有 WETH, DAI, USDC, USDT, COMP, MKR, WBTC
+  // 测试网 只有 WETH
   const bases: Token[] = chainId ? BASES_TO_CHECK_TRADES_AGAINST[chainId] : []
-
+  //basePairs 由bases两两配对组成的交易对列表
   const [tokenA, tokenB] = chainId
     ? [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)]
     : [undefined, undefined]
@@ -25,22 +27,25 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
     [bases]
   )
   // console.log(basePairs, 'basePairs') => []
-  //全部pair组合
+  //在所有可能的中转交易对中进行筛选
   const allPairCombinations: [Token, Token][] = useMemo(
     () =>
       tokenA && tokenB
         ? [
+            // 单个交易池，返回两个token本身组成的交易对
             // the direct pair
             [tokenA, tokenB],
             // token A against all bases
+            // tokenA 和其他bases token组成的交易对
             ...bases.map((base): [Token, Token] => [tokenA, base]),
             // token B against all bases
             ...bases.map((base): [Token, Token] => [tokenB, base]),
             // each base against all bases
             ...basePairs
-          ]
+          ] // 交易对两个token存在，且地址不同
             .filter((tokens): tokens is [Token, Token] => Boolean(tokens[0] && tokens[1]))
             .filter(([t0, t1]) => t0.address !== t1.address)
+            // 某些token只能通过特定的交易对交易，需要排除
             .filter(([tokenA, tokenB]) => {
               if (!chainId) return true
               const customBases = CUSTOM_BASES[chainId]
@@ -62,15 +67,17 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
   // console.log(allPairCombinations, 'allPairCombinations') => []
 
   const allPairs = usePairs(allPairCombinations)
-  console.log(allPairs, 'allPairs3')
   // only pass along valid pairs, non-duplicated pairs
+  // 校验合法性和去重
   return useMemo(
     () =>
       Object.values(
         allPairs
           // filter out invalid pairs
+          //  交易池子需要存在
           .filter((result): result is [PairState.EXISTS, Pair] => Boolean(result[0] === PairState.EXISTS && result[1]))
           // filter out duplicated pairs
+          //  去重
           .reduce<{ [pairAddress: string]: Pair }>((memo, [, curr]) => {
             memo[curr.liquidityToken.address] = memo[curr.liquidityToken.address] ?? curr
             return memo
