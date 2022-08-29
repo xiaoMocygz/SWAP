@@ -67,12 +67,12 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
 export interface AdvancedSwapDetailsProps {
   trade?: Trade
 }
-
+// 交易详情
 export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
   const theme = useContext(ThemeContext)
-
+  // 用户允许的滑点
   const [allowedSlippage] = useUserSlippageTolerance()
-
+  // 显示路由路径
   const showRoute = Boolean(trade && trade.route.path.length > 2)
 
   return (

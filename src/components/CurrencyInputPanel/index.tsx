@@ -231,6 +231,7 @@ export default function CurrencyInputPanel({
                 className="token-amount-input"
                 value={value}
                 onUserInput={val => {
+                  console.log(val, 'input value = ' + val)
                   onUserInput(val)
                 }}
               />

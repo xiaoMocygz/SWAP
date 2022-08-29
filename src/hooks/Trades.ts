@@ -24,7 +24,8 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
       ),
     [bases]
   )
-
+  // console.log(basePairs, 'basePairs') => []
+  //全部pair组合
   const allPairCombinations: [Token, Token][] = useMemo(
     () =>
       tokenA && tokenB
@@ -58,9 +59,10 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
         : [],
     [tokenA, tokenB, bases, basePairs, chainId]
   )
+  // console.log(allPairCombinations, 'allPairCombinations') => []
 
   const allPairs = usePairs(allPairCombinations)
-
+  console.log(allPairs, 'allPairs3')
   // only pass along valid pairs, non-duplicated pairs
   return useMemo(
     () =>
@@ -80,12 +82,24 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
 
 /**
  * Returns the best trade for the exact amount of tokens in to the given token out
+ * 将输入代币的确切数量的最佳交易返回给给定的代币
  */
 export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?: Currency): Trade | null {
+  // 允许的交易对
   const allowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut)
   return useMemo(() => {
     if (currencyAmountIn && currencyOut && allowedPairs.length > 0) {
+      console.log(
+        '43434',
+        Trade.bestTradeExactIn(allowedPairs, currencyAmountIn, currencyOut, { maxHops: 3, maxNumResults: 1 })[0] ?? null
+      )
       return (
+        /**
+         * allowedPairs  Pairs列表
+         * currencyAmountIn 输入数量
+         * currencyOut 输出数量
+         * 给定一个配对列表、一个固定的输入量和输出的代币数量，此方法返回将maxNumResults输入代币数量交换为输出代币的最佳交易，最多进行一次maxHops跳跃。返回的交易按输出量按降序排序，并且都共享给定的输入量。
+         */
         Trade.bestTradeExactIn(allowedPairs, currencyAmountIn, currencyOut, { maxHops: 3, maxNumResults: 1 })[0] ?? null
       )
     }
