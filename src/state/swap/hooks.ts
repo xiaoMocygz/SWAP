@@ -123,9 +123,9 @@ export function useDerivedSwapInfo(): {
   const {
     independentField,
     typedValue,
-    [Field.INPUT]: { currencyId: inputCurrencyId },
-    [Field.OUTPUT]: { currencyId: outputCurrencyId },
-    recipient
+    [Field.INPUT]: { currencyId: inputCurrencyId }, //输入address
+    [Field.OUTPUT]: { currencyId: outputCurrencyId }, //输出address
+    recipient //接收地址
   } = useSwapState()
 
   const inputCurrency = useCurrency(inputCurrencyId)
@@ -137,7 +137,7 @@ export function useDerivedSwapInfo(): {
     inputCurrency ?? undefined,
     outputCurrency ?? undefined
   ])
-
+  // 精确输入
   const isExactIn: boolean = independentField === Field.INPUT
   const parsedAmount = tryParseAmount(typedValue, (isExactIn ? inputCurrency : outputCurrency) ?? undefined)
 

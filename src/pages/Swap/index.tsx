@@ -79,6 +79,7 @@ export default function Swap() {
 
   // swap state
   const { independentField, typedValue, recipient } = useSwapState()
+  // 使用派生交换信息
   const {
     v1Trade,
     v2Trade,
@@ -126,6 +127,7 @@ export default function Swap() {
 
   const handleTypeInput = useCallback(
     (value: string) => {
+      console.log(value, 'Field.INPUT')
       onUserInput(Field.INPUT, value)
     },
     [onUserInput]
