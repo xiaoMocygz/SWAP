@@ -41,8 +41,6 @@ const QueryList = styled.div`
   margin: 10px 0px;
 `
 
-// const TokenList = styled.div``
-
 const ListDiv = styled.div`
   display: flex;
   line-height: 25px;
@@ -73,9 +71,24 @@ const QueryButton = styled.button`
 
 interface CurrencyInquire {
   currency?: Currency | null
+  arr?: Array<Text>
 }
 
 export default function Inquire({ currency }: CurrencyInquire) {
+  const arr = [
+    {
+      id: 1,
+      tokenName: 'EOTC'
+    },
+    {
+      id: 2,
+      tokenName: 'USDT'
+    },
+    {
+      id: 3,
+      tokenName: 'Sushi'
+    }
+  ]
   const { account } = useActiveWeb3React()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
@@ -85,25 +98,29 @@ export default function Inquire({ currency }: CurrencyInquire) {
         <ActiveText>查询结果</ActiveText>
         <ListImg src={Refresh}></ListImg>
       </ListTitle>
-      <QueryList>
-        <ListTitle>
-          <ListDiv>
-            <ListImg src={querylogo}></ListImg>
-            <ActiveText> EOTC</ActiveText>
-          </ListDiv>
-          <ListDiv>
-            <TokenBalance>EOTC余额: {selectedCurrencyBalance?.toSignificant(6)}</TokenBalance>
-            <TokenBalance>BNB余额: {userEthBalance?.toSignificant(4)}</TokenBalance>
-          </ListDiv>
-        </ListTitle>
-        <ListTitle>
-          <ListDiv>
-            <QueryText>2.38 EOTC</QueryText>
-            <TokenBalance>(手续费：~$0.003)</TokenBalance>
-          </ListDiv>
-          <QueryButton>交换</QueryButton>
-        </ListTitle>
-      </QueryList>
+      {arr.map(item => {
+        return (
+          <QueryList key={item.id}>
+            <ListTitle>
+              <ListDiv>
+                <ListImg src={querylogo}></ListImg>
+                <ActiveText> {item.tokenName}</ActiveText>
+              </ListDiv>
+              <ListDiv>
+                <TokenBalance>EOTC余额: {selectedCurrencyBalance?.toSignificant(6)}</TokenBalance>
+                <TokenBalance>BNB余额: {userEthBalance?.toSignificant(4)}</TokenBalance>
+              </ListDiv>
+            </ListTitle>
+            <ListTitle>
+              <ListDiv>
+                <QueryText>2.38 EOTC</QueryText>
+                <TokenBalance>(手续费：~$0.003)</TokenBalance>
+              </ListDiv>
+              <QueryButton>交换</QueryButton>
+            </ListTitle>
+          </QueryList>
+        )
+      })}
     </Lists>
   )
 }
