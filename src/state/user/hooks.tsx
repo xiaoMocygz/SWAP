@@ -162,6 +162,7 @@ export function usePairAdder(): (pair: Pair) => void {
 
 /**
  * Given two tokens return the liquidity token that represents its liquidity shares
+ * 给定两个令牌返回代表其流动性股份的流动性令牌
  * @param tokenA one of the two tokens
  * @param tokenB the other token
  */

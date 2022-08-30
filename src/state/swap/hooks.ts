@@ -137,15 +137,16 @@ export function useDerivedSwapInfo(): {
     inputCurrency ?? undefined,
     outputCurrency ?? undefined
   ])
-  // 精确输入
+  // 精确输入 independentField === 'INPUT"
   const isExactIn: boolean = independentField === Field.INPUT
   const parsedAmount = tryParseAmount(typedValue, (isExactIn ? inputCurrency : outputCurrency) ?? undefined)
+  const bestTradeExactInObj = useTradeExactIn(isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined)
 
-  const bestTradeExactIn = useTradeExactIn(isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined)
-  const bestTradeExactOut = useTradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined)
-
+  const bestTradeExactOutObj = useTradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined)
+  const bestTradeExactIn = bestTradeExactInObj?.EOTC
+  const bestTradeExactOut = bestTradeExactOutObj?.EOTC
   const v2Trade = isExactIn ? bestTradeExactIn : bestTradeExactOut
-
+  console.log(bestTradeExactInObj, 'bestTradeExactInObj')
   const currencyBalances = {
     [Field.INPUT]: relevantTokenBalances[0],
     [Field.OUTPUT]: relevantTokenBalances[1]
@@ -156,7 +157,7 @@ export function useDerivedSwapInfo(): {
     [Field.OUTPUT]: outputCurrency ?? undefined
   }
 
-  // get link to trade on v1, if a better rate exists
+  // 如果存在更好的汇率，获取v1交易的链接
   const v1Trade = useV1Trade(isExactIn, currencies[Field.INPUT], currencies[Field.OUTPUT], parsedAmount)
 
   let inputError: string | undefined
@@ -186,13 +187,15 @@ export function useDerivedSwapInfo(): {
   }
 
   const [allowedSlippage] = useUserSlippageTolerance()
-
+  //  计算考虑滑点的情况下的输入 v2
   const slippageAdjustedAmounts = v2Trade && allowedSlippage && computeSlippageAdjustedAmounts(v2Trade, allowedSlippage)
-
+  console.log(slippageAdjustedAmounts, 'slippageAdjustedAmounts')
+  // 计算考虑滑点的情况下的输入 v1
   const slippageAdjustedAmountsV1 =
     v1Trade && allowedSlippage && computeSlippageAdjustedAmounts(v1Trade, allowedSlippage)
 
   // compare input balance to max input based on version
+  // 比较用户的token余额与计算滑点后的输入数量
   const [balanceIn, amountIn] = [
     currencyBalances[Field.INPUT],
     toggledVersion === Version.v1
@@ -204,6 +207,7 @@ export function useDerivedSwapInfo(): {
       : null
   ]
 
+  // 若余额小于计算滑点后的数量 则报错
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
     inputError = amountIn.currency.symbol + ' 余额不足'
   }

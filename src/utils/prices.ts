@@ -43,6 +43,7 @@ export function computeTradePriceBreakdown(
 }
 
 // computes the minimum amount out and maximum amount in for a trade given a user specified allowed slippage in bips
+// 计算出交易的最小金额和最大金额，给定用户允许的点位滑动
 export function computeSlippageAdjustedAmounts(
   trade: Trade | undefined,
   allowedSlippage: number

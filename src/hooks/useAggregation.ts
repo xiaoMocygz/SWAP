@@ -12,13 +12,10 @@ export async function useAggregation() {
   // uint256 balanceB;  // tokenB余额
   // uint256 lpWeight;  // 资金池厚度
   const result = await contract.getRate(
-    '0x52445374E55a63C0De647445D5B6a4244702980C',
-    '0x55d398326f99059fF775485246999027B3197955'
+    '0x55d398326f99059fF775485246999027B3197955',
+    '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56'
   )
-  console.log(
-    result.filter((item: { name: any }) => item.name),
-    'result'
-  )
+  console.log(result, 'result')
 
   return [...result.filter((item: { name: any }) => item.name)]
 }

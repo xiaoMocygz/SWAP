@@ -1,7 +1,8 @@
-import { ChainId, JSBI, Percent, Token, WETH } from 'eotc-bscswap-sdk'
+import { ChainId, JSBI, Pair, Percent, Token, WETH } from 'eotc-bscswap-sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
+import { PairState } from '../data/Reserves'
 
 export const ROUTER_ADDRESS = '0xbD537A5afBB63295F1cab9A7A670415e153a91B9'
 export const AGGREGATION_ADDRESS = '0x2ae87E829a0bA3d9d7cFDD47128f43917fF5556C'
@@ -27,6 +28,35 @@ const WETH_ONLY: ChainTokenList = {
   [ChainId.BSC]: [WETH[ChainId.BSC]],
   [ChainId.BSC_TSET]: [WETH[ChainId.BSC_TSET]],
   [ChainId.MATIC]: [WETH[ChainId.MATIC]]
+}
+interface CONTRACT {
+  [key: string]: {
+    AllPairs?: Pair[]
+    Pair: [PairState, Pair | null][]
+    FACTORY: string
+    ROUTER: string
+    INIT_CODE_HASH: string
+  }
+}
+export const CONTRACT: CONTRACT = {
+  PANCAKE: {
+    FACTORY: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
+    ROUTER: '0x10ED43C718714eb63d5aA57B78B54704E256024E',
+    INIT_CODE_HASH: '0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5',
+    Pair: []
+  },
+  SUHSI: {
+    FACTORY: '0xc35dadb65012ec5796536bd9864ed8773abc74c4',
+    ROUTER: '0x1b02dA8Cb0d097eB8D57A175b88c7D8b47997506',
+    INIT_CODE_HASH: '0xe18a34eb0e04b04f7a0ac29a6e80748dca96319b42c54d679cb821dca90c6303',
+    Pair: []
+  },
+  EOTC: {
+    FACTORY: '0x73857Fa9a849Cd6DC8387C37f54Ad0F56B575eA2',
+    ROUTER: '0xbD537A5afBB63295F1cab9A7A670415e153a91B9',
+    INIT_CODE_HASH: '0xa9fbfced95fed0f4cbe56a6f056f7f895c31bee594b6a273f043d2ae917102e3',
+    Pair: []
+  }
 }
 
 // used to construct intermediary pairs for trading

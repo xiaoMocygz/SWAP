@@ -1,14 +1,15 @@
 import { Currency, CurrencyAmount, Pair, Token, Trade } from 'eotc-bscswap-sdk'
 import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
+// import { CONTRACT } from '../constants'
 
 import { BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants'
-import { PairState, usePairs } from '../data/Reserves'
+import { PairState, usePairsPor } from '../data/Reserves'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
 
 import { useActiveWeb3React } from './index'
 // 筛选 tokenA 和 tokenB 所有可用的交易对（包含中转交易对）
-function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
+function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): any {
   const { chainId } = useActiveWeb3React()
   // 默认的中转token
   // 主网有 WETH, DAI, USDC, USDT, COMP, MKR, WBTC
@@ -64,15 +65,15 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
         : [],
     [tokenA, tokenB, bases, basePairs, chainId]
   )
-  // console.log(allPairCombinations, 'allPairCombinations') => []
-
-  const allPairs = usePairs(allPairCombinations)
-  // only pass along valid pairs, non-duplicated pairs
+  // const allPairs = usePairs(allPairCombinations)
+  const allPairs1 = usePairsPor(allPairCombinations)
+  // only pass along valid pairs, non-duplicated pairss
   // 校验合法性和去重
-  return useMemo(
-    () =>
-      Object.values(
-        allPairs
+  return useMemo(() => {
+    const newAllPairs: any = Object.assign(allPairs1, {})
+    for (const pairs in allPairs1) {
+      newAllPairs[pairs] = Object.values(
+        allPairs1[pairs]
           // filter out invalid pairs
           //  交易池子需要存在
           .filter((result): result is [PairState.EXISTS, Pair] => Boolean(result[0] === PairState.EXISTS && result[1]))
@@ -82,51 +83,82 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
             memo[curr.liquidityToken.address] = memo[curr.liquidityToken.address] ?? curr
             return memo
           }, {})
-      ),
-    [allPairs]
-  )
+      )
+    }
+    return newAllPairs
+  }, [allPairs1])
 }
-
+interface TradeList {
+  [key: string]: Trade | null
+}
 /**
  * Returns the best trade for the exact amount of tokens in to the given token out
  * 将输入代币的确切数量的最佳交易返回给给定的代币
  */
-export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?: Currency): Trade | null {
+export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?: Currency): TradeList | null {
   // 允许的交易对
   const allowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut)
   return useMemo(() => {
-    if (currencyAmountIn && currencyOut && allowedPairs.length > 0) {
-      console.log(
-        '43434',
-        Trade.bestTradeExactIn(allowedPairs, currencyAmountIn, currencyOut, { maxHops: 3, maxNumResults: 1 })[0] ?? null
-      )
-      return (
-        /**
-         * allowedPairs  Pairs列表
-         * currencyAmountIn 输入数量
-         * currencyOut 输出数量
-         * 给定一个配对列表、一个固定的输入量和输出的代币数量，此方法返回将maxNumResults输入代币数量交换为输出代币的最佳交易，最多进行一次maxHops跳跃。返回的交易按输出量按降序排序，并且都共享给定的输入量。
-         */
-        Trade.bestTradeExactIn(allowedPairs, currencyAmountIn, currencyOut, { maxHops: 3, maxNumResults: 1 })[0] ?? null
-      )
+    const TradeList: TradeList = {}
+    if (!currencyAmountIn || !currencyOut) return null
+    for (const item in allowedPairs) {
+      if (allowedPairs[item].length > 0) {
+        TradeList[item] =
+          Trade.bestTradeExactIn(allowedPairs[item], currencyAmountIn, currencyOut, {
+            maxHops: 3,
+            maxNumResults: 1
+          })[0] ?? null
+      } else {
+        TradeList[item] = null
+      }
     }
-    return null
+    return TradeList
+    // if (currencyAmountIn && currencyOut && allowedPairs.length > 0) {
+    //   // console.log(
+    //   //   '43434',
+    //   //   Trade.bestTradeExactIn(allowedPairs, currencyAmountIn, currencyOut, { maxHops: 3, maxNumResults: 1 })[0] ?? null
+    //   // )
+    //   return (
+    //     /**
+    //      * allowedPairs  Pairs列表
+    //      * currencyAmountIn 输入数量
+    //      * currencyOut 输出数量
+    //      * 给定一个配对列表、一个固定的输入量和输出的代币数量，此方法返回将maxNumResults输入代币数量交换为输出代币的最佳交易，最多进行一次maxHops跳跃。返回的交易按输出量按降序排序，并且都共享给定的输入量。
+    //      */
+    //     Trade.bestTradeExactIn(allowedPairs, currencyAmountIn, currencyOut, { maxHops: 3, maxNumResults: 1 })[0] ?? null
+    //   )
+    // }
+    // return null
   }, [allowedPairs, currencyAmountIn, currencyOut])
 }
 
 /**
  * Returns the best trade for the token in to the exact amount of token out
  */
-export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: CurrencyAmount): Trade | null {
+export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: CurrencyAmount): TradeList | null {
   const allowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency)
 
   return useMemo(() => {
-    if (currencyIn && currencyAmountOut && allowedPairs.length > 0) {
-      return (
-        Trade.bestTradeExactOut(allowedPairs, currencyIn, currencyAmountOut, { maxHops: 3, maxNumResults: 1 })[0] ??
-        null
-      )
+    // if (currencyIn && currencyAmountOut && allowedPairs.length > 0) {
+    //   return (
+    //     Trade.bestTradeExactOut(allowedPairs, currencyIn, currencyAmountOut, { maxHops: 3, maxNumResults: 1 })[0] ??
+    //     null
+    //   )
+    // }
+    // return null
+    const TradeList: TradeList = {}
+    if (!currencyAmountOut || !currencyIn) return null
+    for (const item in allowedPairs) {
+      if (allowedPairs[item].length > 0) {
+        TradeList[item] =
+          Trade.bestTradeExactIn(allowedPairs[item], currencyAmountOut, currencyIn, {
+            maxHops: 3,
+            maxNumResults: 1
+          })[0] ?? null
+      } else {
+        TradeList[item] = null
+      }
     }
-    return null
+    return TradeList
   }, [allowedPairs, currencyIn, currencyAmountOut])
 }

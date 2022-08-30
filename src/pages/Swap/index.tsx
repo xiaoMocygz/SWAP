@@ -128,7 +128,6 @@ export default function Swap() {
 
   const handleTypeInput = useCallback(
     (value: string) => {
-      console.log(value, 'Field.INPUT')
       onUserInput(Field.INPUT, value)
     },
     [onUserInput]
