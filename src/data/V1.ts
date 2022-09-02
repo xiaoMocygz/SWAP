@@ -15,6 +15,7 @@ import {
   TradeType,
   WETH
 } from 'eotc-bscswap-sdk'
+import { TradeList } from '../hooks/Trades'
 import { useMemo } from 'react'
 import { useActiveWeb3React } from '../hooks'
 import { useAllTokens } from '../hooks/Tokens'
@@ -180,12 +181,19 @@ export function isTradeBetter(
     !currencyEquals(tradeA.inputAmount.currency, tradeB.inputAmount.currency) ||
     !currencyEquals(tradeB.outputAmount.currency, tradeB.outputAmount.currency)
   ) {
+    // 交易不能比较
     throw new Error('Trades are not comparable')
   }
 
   if (minimumDelta.equalTo(ZERO_PERCENT)) {
+    // A价格小于B价格
     return tradeA.executionPrice.lessThan(tradeB.executionPrice)
   } else {
     return tradeA.executionPrice.raw.multiply(minimumDelta.add(ONE_HUNDRED_PERCENT)).lessThan(tradeB.executionPrice)
   }
+}
+export function tradeBetterSort(TradeList: TradeList): TradeList {
+  const TradeListKeys = Object.keys(TradeList)
+  if (TradeListKeys.length <= 0) return TradeList
+  return TradeList
 }

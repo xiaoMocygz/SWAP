@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useV1Trade } from '../../data/V1'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
-import { useTradeExactIn, useTradeExactOut } from '../../hooks/Trades'
+import { useTradeExactIn, useTradeExactOut, TradeList } from '../../hooks/Trades'
 import useParsedQueryString from '../../hooks/useParsedQueryString'
 import { isAddress } from '../../utils'
 import { AppDispatch, AppState } from '../index'
@@ -115,6 +115,7 @@ export function useDerivedSwapInfo(): {
   v2Trade: Trade | undefined
   inputError?: string
   v1Trade: Trade | undefined
+  v2TradeList: TradeList | null
 } {
   const { account } = useActiveWeb3React()
 
@@ -141,11 +142,11 @@ export function useDerivedSwapInfo(): {
   const isExactIn: boolean = independentField === Field.INPUT
   const parsedAmount = tryParseAmount(typedValue, (isExactIn ? inputCurrency : outputCurrency) ?? undefined)
   const bestTradeExactInObj = useTradeExactIn(isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined)
-
   const bestTradeExactOutObj = useTradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined)
   const bestTradeExactIn = bestTradeExactInObj?.EOTC
   const bestTradeExactOut = bestTradeExactOutObj?.EOTC
   const v2Trade = isExactIn ? bestTradeExactIn : bestTradeExactOut
+  const v2TradeList = isExactIn ? bestTradeExactInObj : bestTradeExactOutObj
   console.log(bestTradeExactInObj, 'bestTradeExactInObj')
   const currencyBalances = {
     [Field.INPUT]: relevantTokenBalances[0],
@@ -189,7 +190,17 @@ export function useDerivedSwapInfo(): {
   const [allowedSlippage] = useUserSlippageTolerance()
   //  计算考虑滑点的情况下的输入 v2
   const slippageAdjustedAmounts = v2Trade && allowedSlippage && computeSlippageAdjustedAmounts(v2Trade, allowedSlippage)
-  console.log(slippageAdjustedAmounts, 'slippageAdjustedAmounts')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  //@ts-ignore
+  console.log(
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    //@ts-ignore
+    slippageAdjustedAmounts?.INPUT?.toFixed(2),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    //@ts-ignore
+    slippageAdjustedAmounts?.OUTPUT?.toFixed(6),
+    'slippageAdjustedAmounts'
+  )
   // 计算考虑滑点的情况下的输入 v1
   const slippageAdjustedAmountsV1 =
     v1Trade && allowedSlippage && computeSlippageAdjustedAmounts(v1Trade, allowedSlippage)
@@ -218,7 +229,8 @@ export function useDerivedSwapInfo(): {
     parsedAmount,
     v2Trade: v2Trade ?? undefined,
     inputError,
-    v1Trade
+    v1Trade,
+    v2TradeList
   }
 }
 

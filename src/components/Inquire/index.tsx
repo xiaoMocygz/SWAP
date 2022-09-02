@@ -7,9 +7,9 @@ import { useETHBalances, useCurrencyBalance } from '../../state/wallet/hooks'
 import { Currency } from 'eotc-bscswap-sdk'
 
 const Lists = styled.div`
-  position: relative;
+  /* position: relative;
   top: -455px;
-  left: 550px;
+  left: 550px; */
   padding: 1rem;
   border-radius: 30px;
   font-size: 18px;

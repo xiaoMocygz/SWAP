@@ -88,7 +88,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): any {
     return newAllPairs
   }, [allPairs1])
 }
-interface TradeList {
+export interface TradeList {
   [key: string]: Trade | null
 }
 /**

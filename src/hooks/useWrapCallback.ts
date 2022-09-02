@@ -15,6 +15,7 @@ export enum WrapType {
 const NOT_APPLICABLE = { wrapType: WrapType.NOT_APPLICABLE }
 /**
  * Given the selected input and output currency, return a wrap callback
+ * 给定选定的输入和输出货币，返回包裹回调
  * @param inputCurrency the selected input currency
  * @param outputCurrency the selected output currency
  * @param typedValue the user input value
@@ -28,6 +29,7 @@ export default function useWrapCallback(
   const wethContract = useWETHContract()
   const balance = useCurrencyBalance(account ?? undefined, inputCurrency)
   // we can always parse the amount typed as the input currency, since wrapping is 1:1
+  //我们始终可以解析输入的输入货币的金额，因为包装为1：1
   const inputAmount = useMemo(() => tryParseAmount(typedValue, inputCurrency), [inputCurrency, typedValue])
   const addTransaction = useTransactionAdder()
 
