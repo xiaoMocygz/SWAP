@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import { CurrencyAmount, JSBI, Token, Trade } from 'eotc-bscswap-sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown } from 'react-feather'
@@ -403,6 +404,41 @@ export default function Swap() {
                       连接钱包
                     </ButtonLight>
                   </>
+                ) : (
+                  <ButtonError
+                    onClick={() => {
+                      // if (isExpertMode) {
+                      //   handleSwap()
+                      // } else {
+                      //   setSwapState({
+                      //     tradeToConfirm: trade,
+                      //     attemptingTxn: false,
+                      //     swapErrorMessage: undefined,
+                      //     showConfirm: true,
+                      //     txHash: undefined
+                      //   })
+                      // }
+                    }}
+                    id="swap-button"
+                    disabled={!isValid || (priceImpactSeverity > 3 && !isExpertMode) || !!swapCallbackError}
+                  >
+                    <Text fontSize={20} fontWeight={500}>
+                      查询
+                    </Text>
+                  </ButtonError>
+                )}
+                {showApproveFlow && <ProgressSteps steps={[approval === ApprovalState.APPROVED]} />}
+                {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
+                {betterTradeLinkVersion && <BetterTradeLink version={betterTradeLinkVersion} />}
+              </BottomGrouping>
+              {/* <BottomGrouping>
+                {!account ? (
+                  <>
+                    <ButtonLight onClick={toggleWalletModal}>
+                      <ButtonWallet src={Wallet} />
+                      连接钱包
+                    </ButtonLight>
+                  </>
                 ) : showWrap ? (
                   <ButtonPrimary disabled={Boolean(wrapInputError)} onClick={onWrap}>
                     {wrapInputError ??
@@ -490,14 +526,14 @@ export default function Swap() {
                 {showApproveFlow && <ProgressSteps steps={[approval === ApprovalState.APPROVED]} />}
                 {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
                 {betterTradeLinkVersion && <BetterTradeLink version={betterTradeLinkVersion} />}
-              </BottomGrouping>
+              </BottomGrouping> */}
             </Wrapper>
           </AppBody>
-          <AdvancedSwapDetailsDropdown trade={v2TradeList?.EOTC as Trade | undefined} />
+          {/* <AdvancedSwapDetailsDropdown trade={v2TradeList?.EOTC as Trade | undefined} />
           <div>PANCAKE</div>
           <AdvancedSwapDetailsDropdown trade={v2TradeList?.PANCAKE as Trade | undefined} />
           <div>SUHSI</div>
-          <AdvancedSwapDetailsDropdown trade={v2TradeList?.SUHSI as Trade | undefined} />
+          <AdvancedSwapDetailsDropdown trade={v2TradeList?.SUHSI as Trade | undefined} /> */}
         </div>
         <Inquire />
       </div>
